@@ -62,17 +62,14 @@ namespace SelfStudyGraphs
         }
 
         /// <summary>
-        /// Prints the vertices breadth first
+        /// Prints the vertices breadth first.
+        /// Any vertices that cannot be reached from the starting vertex are not printed.
         /// </summary>
         /// <param name="startingVertex">Vertex where printing starts</param>
         internal void PrintVerticesBreathFirst(int startingVertex)
         {
-            // Check for out of bounds startingVertex
-            if (startingVertex < 0 || startingVertex >= numVertices)
-            {
-                Console.WriteLine($"Parameter must be at least 0 and less than {numVertices}.");
-                return;
-            }
+            VertexValidator(startingVertex);
+
             // The graph may have a cycle, so store visited vertices.
             bool[] visited = new bool[numVertices];
             visited[startingVertex] = true;
@@ -97,6 +94,92 @@ namespace SelfStudyGraphs
                         q.Enqueue(neighbor);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Prints the vertices using preorder traversal.
+        /// Any vertices that cannot be reached from the starting vertex are not printed.
+        /// </summary>
+        /// <param name="startingVertex">Vertex where printing starts</param>
+        internal void PrintVerticesPreorder(int startingVertex)
+        {
+            VertexValidator(startingVertex);
+
+            // The graph may have a cycle, so store visited vertices.
+            bool[] visited = new bool[numVertices];
+
+            PrintVerticesPreorderHelper(startingVertex, visited);
+        }
+
+        internal void PrintVerticesInOrder(int startingVertex)
+        {
+            VertexValidator(startingVertex);
+
+            // The graph may have a cycle, so store visited vertices.
+            bool[] visited = new bool[numVertices];
+
+            PrintVerticesInOrderHelper(startingVertex, visited);
+        }
+
+        internal void PrintVerticesPostOrder(int startingVertex)
+        {
+            VertexValidator(startingVertex);
+
+            // The graph may have a cycle, so store visited vertices.
+            bool[] visited = new bool[numVertices];
+
+            PrintVerticesPostOrderHelper(startingVertex, visited);
+        }
+
+        private void PrintVerticesPostOrderHelper(int vertex, bool[] visited)
+        {
+            foreach (int neighbor in adj[vertex])
+            {
+                if (!visited[neighbor])
+                {
+                    PrintVerticesPreorderHelper(neighbor, visited);
+
+                    visited[vertex] = true;
+                    Console.Write(vertex + " ");
+                }
+            }
+        }
+
+        private void PrintVerticesInOrderHelper(int startingVertex, bool[] visited)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Helper method for PrintVerticesPreorder()
+        /// </summary>
+        /// <param name="vertex">Current vertex to print</param>
+        /// <param name="visited">Array that keeps track of visited vertices</param>
+        private void PrintVerticesPreorderHelper(int vertex, bool[] visited)
+        {
+            visited[vertex] = true;
+            Console.Write(vertex + " ");
+
+            foreach (int neighbor in adj[vertex])
+            {
+                if (!visited[neighbor])
+                {
+                    PrintVerticesPreorderHelper(neighbor, visited);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks for a vertex within range.
+        /// </summary>
+        /// <param name="vertex">The vertex to validate</param>
+        private void VertexValidator(int vertex)
+        {
+            // Check for out of bounds vertex
+            if (vertex < 0 || vertex >= numVertices)
+            {
+                throw new ArgumentOutOfRangeException($"Vertex must be at least 0 and less than {numVertices}.");
             }
         }
     }

@@ -28,11 +28,16 @@ namespace SelfStudyGraphs
             Console.WriteLine("\nHere's a breadth first traversal of a directed graph with an adjancency list and 4 vertices starting from vertex 2:");
             graph1.PrintVerticesBreathFirst(2);
 
-            Console.WriteLine("\n\nSame graph, same method, starting vertex is -1:");
-            graph1.PrintVerticesBreathFirst(-1);
+            // Using impossible starting vertices throws exceptions:
+            //Console.WriteLine("\n\nSame graph, same method, starting vertex is -1:");
+            //graph1.PrintVerticesBreathFirst(-1);
+            //Console.WriteLine($"\n\nSame graph, same method, starting vertex is {graph1.numVertices}:");
+            //graph1.PrintVerticesBreathFirst(graph1.numVertices);
 
-            Console.WriteLine($"\n\nSame graph, same method, starting vertex is {graph1.numVertices}:");
-            graph1.PrintVerticesBreathFirst(graph1.numVertices);
+            Console.WriteLine("\n\nSame graph, preorder traversal, starting vertex is 2:");
+            graph1.PrintVerticesPreorder(2);
+
+            // Using impossible vertices with preorder traversal throws exceptions:
 
             // Produce a Null Reference Exception that doesn't reach the method.
             // graph1 = null;
