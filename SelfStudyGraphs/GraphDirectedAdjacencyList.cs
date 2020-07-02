@@ -102,53 +102,14 @@ namespace SelfStudyGraphs
         /// Any vertices that cannot be reached from the starting vertex are not printed.
         /// </summary>
         /// <param name="startingVertex">Vertex where printing starts</param>
-        internal void PrintVerticesPreorder(int startingVertex)
+        internal void PrintVerticesDepthFirst(int startingVertex)
         {
             VertexValidator(startingVertex);
 
             // The graph may have a cycle, so store visited vertices.
             bool[] visited = new bool[numVertices];
 
-            PrintVerticesPreorderHelper(startingVertex, visited);
-        }
-
-        internal void PrintVerticesInOrder(int startingVertex)
-        {
-            VertexValidator(startingVertex);
-
-            // The graph may have a cycle, so store visited vertices.
-            bool[] visited = new bool[numVertices];
-
-            PrintVerticesInOrderHelper(startingVertex, visited);
-        }
-
-        internal void PrintVerticesPostOrder(int startingVertex)
-        {
-            VertexValidator(startingVertex);
-
-            // The graph may have a cycle, so store visited vertices.
-            bool[] visited = new bool[numVertices];
-
-            PrintVerticesPostOrderHelper(startingVertex, visited);
-        }
-
-        private void PrintVerticesPostOrderHelper(int vertex, bool[] visited)
-        {
-            foreach (int neighbor in adj[vertex])
-            {
-                if (!visited[neighbor])
-                {
-                    PrintVerticesPreorderHelper(neighbor, visited);
-
-                    visited[vertex] = true;
-                    Console.Write(vertex + " ");
-                }
-            }
-        }
-
-        private void PrintVerticesInOrderHelper(int startingVertex, bool[] visited)
-        {
-            throw new NotImplementedException();
+            PrintVerticesDepthFirstHelper(startingVertex, visited);
         }
 
         /// <summary>
@@ -156,7 +117,7 @@ namespace SelfStudyGraphs
         /// </summary>
         /// <param name="vertex">Current vertex to print</param>
         /// <param name="visited">Array that keeps track of visited vertices</param>
-        private void PrintVerticesPreorderHelper(int vertex, bool[] visited)
+        private void PrintVerticesDepthFirstHelper(int vertex, bool[] visited)
         {
             visited[vertex] = true;
             Console.Write(vertex + " ");
@@ -165,7 +126,7 @@ namespace SelfStudyGraphs
             {
                 if (!visited[neighbor])
                 {
-                    PrintVerticesPreorderHelper(neighbor, visited);
+                    PrintVerticesDepthFirstHelper(neighbor, visited);
                 }
             }
         }

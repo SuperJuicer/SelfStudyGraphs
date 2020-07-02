@@ -34,10 +34,17 @@ namespace SelfStudyGraphs
             //Console.WriteLine($"\n\nSame graph, same method, starting vertex is {graph1.numVertices}:");
             //graph1.PrintVerticesBreathFirst(graph1.numVertices);
 
-            Console.WriteLine("\n\nSame graph, preorder traversal, starting vertex is 2:");
-            graph1.PrintVerticesPreorder(2);
+            Console.WriteLine("\n\nSame graph, depth first traversal, starting vertex is 2:");
+            graph1.PrintVerticesDepthFirst(2);
 
-            // Using impossible vertices with preorder traversal throws exceptions:
+            Console.WriteLine("\n\nSame graph, same method, starting vertex is 0:");
+            graph1.PrintVerticesDepthFirst(0);
+
+            // Using impossible starting vertices throws exceptions:
+            // Console.WriteLine("\n\nSame graph, same method, starting vertex is -1:");
+            // graph1.PrintVerticesDepthFirst(-1);
+            // Console.WriteLine($"\n\nSame graph, same method, starting vertex is {graph1.numVertices}:");
+            // graph1.PrintVerticesDepthFirst(graph1.numVertices);
 
             // Produce a Null Reference Exception that doesn't reach the method.
             // graph1 = null;
