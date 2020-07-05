@@ -28,7 +28,7 @@ namespace SelfStudyGraphs
             if (numVertices < 1)
             {
                 throw new ArgumentOutOfRangeException("Graph must have at least 1 vertex.");
-            }   
+            }
 
             this.numVertices = numVertices;
             adj = new List<int>[numVertices];
@@ -90,6 +90,7 @@ namespace SelfStudyGraphs
                 {
                     if (!visited[neighbor])
                     {
+                        visited[neighbor] = true;
                         q.Enqueue(neighbor);
                     }
                 }
