@@ -28,7 +28,7 @@ namespace SelfStudyGraphs
             if (numVertices < 1)
             {
                 throw new ArgumentOutOfRangeException("Graph must have at least 1 vertex.");
-            }
+            }   
 
             this.numVertices = numVertices;
             adj = new List<int>[numVertices];
@@ -72,7 +72,6 @@ namespace SelfStudyGraphs
 
             // The graph may have a cycle, so store visited vertices.
             bool[] visited = new bool[numVertices];
-            visited[startingVertex] = true;
 
             // Queue for breadth
             var q = new Queue<int>();
@@ -81,8 +80,9 @@ namespace SelfStudyGraphs
             // Get traversing and printing!
             while (q.Count != 0)
             {
-                // Dequeue and print
+                // Dequeue, visit, and print
                 int currentDequeuedVertex = q.Dequeue();
+                visited[currentDequeuedVertex] = true;
                 Console.Write(currentDequeuedVertex + " ");
 
                 // Using adjacency list
@@ -90,7 +90,6 @@ namespace SelfStudyGraphs
                 {
                     if (!visited[neighbor])
                     {
-                        visited[neighbor] = true;
                         q.Enqueue(neighbor);
                     }
                 }
